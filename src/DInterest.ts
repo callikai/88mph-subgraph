@@ -24,6 +24,9 @@ export function handleEDeposit(event: EDeposit): void {
   deposit.nftID = event.params.depositID
   deposit.user = user.id
   deposit.pool = pool.id
+  deposit.funderMPHRewardEstimated = ZERO_DEC
+  deposit.funderMPHRewardActual = ZERO_DEC
+  deposit.funder = "NULL"
   deposit.amount = normalize(event.params.amount, stablecoinDecimals)
   deposit.maturationTimestamp = event.params.maturationTimestamp
   deposit.active = true
@@ -159,6 +162,9 @@ export function handleEWithdraw(event: EWithdraw): void {
       if (fundedDeposit.active) {
         let fundedDepositInterestGenerated = fundedDeposit.amount.plus(fundedDeposit.interestEarned).times(moneyMarketIncomeIndex.toBigDecimal().div(recordedMoneyMarketIncomeIndex.toBigDecimal()).minus(ONE_INT.toBigDecimal()))
         fundedDeposit.fundingInterestPaid = fundedDeposit.fundingInterestPaid.plus(fundedDepositInterestGenerated)
+        fundedDeposit.funderMPHRewardEstimated = funding.creationTimestamp.gt(fundedDeposit.maturationTimestamp) ?
+      pool.mphFunderRewardMultiplier.times(fundedDeposit.amount).times(fundedDeposit.maturationTimestamp
+        .minus(funding.creationTimestamp).toBigDecimal()) : ZERO_DEC
         fundedDeposit.save()
       }
     }
@@ -235,6 +241,7 @@ export function handleEFund(event: EFund): void {
     let deposit = Deposit.load(pool.address + DELIMITER + id.toString())
     if (deposit.active) {
       deposit.fundingID = fundingID
+      deposit.funder = funder.id;
       deposit.save()
     }
   }

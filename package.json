@@ -4,13 +4,13 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ Bacon-Labs/eighty-eight-mph",
-    "create-local": "graph create --node http://localhost:8020/ Bacon-Labs/88mph",
-    "remove-local": "graph remove --node http://localhost:8020/ Bacon-Labs/88mph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 Bacon-Labs/eighty-eight-mph"
+    "deploy": "npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ callikai/eightyeight-mph-rewards",
+    "create-local": "graph create --node http://localhost:8020/ callikai/eightyeight-mph-rewards",
+    "remove-local": "graph remove --node http://localhost:8020/ callikai/eightyeight-mph-rewards",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 callikai/eightyeight-mph-rewards"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "^0.18.0",
-    "@graphprotocol/graph-ts": "^0.18.1"
+    "@graphprotocol/graph-cli": "^0.21.1",
+    "@graphprotocol/graph-ts": "^0.20.1"
   }
 }

@@ -74,11 +74,14 @@ type Deposit @entity {
   depositLength: BigInt!
   interestEarned: BigDecimal!
   fundingID: BigInt!
+  funderMPHRewardEstimated: BigDecimal!
+  funderMPHRewardActual: BigDecimal!
   mintMPHAmount: BigDecimal!
   takeBackMPHAmount: BigDecimal!
   initialMoneyMarketIncomeIndex: BigInt!
   fundingInterestPaid: BigDecimal!
   fundingRefundAmount: BigDecimal!
+  funder: Funder!
 }
 
 type Funder @entity {

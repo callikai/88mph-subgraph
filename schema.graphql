@@ -70,18 +70,22 @@ type Deposit @entity {
   amount: BigDecimal!
   maturationTimestamp: BigInt!
   active: Boolean!
+  earlyWithdraw: Boolean!
   depositTimestamp: BigInt!
   depositLength: BigInt!
   interestEarned: BigDecimal!
   fundingID: BigInt!
   funderMPHRewardEstimated: BigDecimal!
-  funderMPHRewardActual: BigDecimal!
   mintMPHAmount: BigDecimal!
   takeBackMPHAmount: BigDecimal!
   initialMoneyMarketIncomeIndex: BigInt!
   fundingInterestPaid: BigDecimal!
   fundingRefundAmount: BigDecimal!
-  funder: Funder!
+  funder: String!
+  withdrawTXHash: String!
+  withdrawTXBlockNumber: BigInt!
+  mphFunderRewardMultiplier: BigDecimal!
+
 }
 
 type Funder @entity {
@@ -122,6 +126,7 @@ type Funding @entity {
   creationTimestamp: BigInt!
   mphRewardEarned: BigDecimal!
   refundAmount: BigDecimal!
+  creationTXhash: String!
 }
 
 type MPHHolder @entity {
@@ -154,4 +159,13 @@ type FractionalDeposit @entity {
   ownerAddress: String!
   active: Boolean!
   deposit: Deposit!
+}
+
+type MPHTransfer @entity {
+  id: ID!
+  txhash: String!
+  to: Bytes!
+  from: Bytes!
+  amount: BigInt!
+
 }
